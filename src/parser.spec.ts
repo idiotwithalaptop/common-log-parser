@@ -17,9 +17,9 @@ describe("parse()", () => {
     test("Invalid datetime", () => {
       expect(
         parse(
-          `177.71.128.21 - - [10/ASD/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
+          `177.71.128.21 - - ASDASDASD "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
-      ).rejects.toBe("Invalid date time");
+      ).rejects.toBe("Invalid log entry");
     });
 
     test("Invalid request", () => {
@@ -53,15 +53,15 @@ describe("parse()", () => {
         parse(
           `- test testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: null,
         rfc931: "test",
         user: "testUser",
         datetime: "10/Jul/2018:22:21:28 +0200",
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: 200,
         numberOfBytes: 3574,
@@ -73,15 +73,15 @@ describe("parse()", () => {
         parse(
           `177.71.128.21 - testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
         rfc931: null,
         user: "testUser",
         datetime: "10/Jul/2018:22:21:28 +0200",
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: 200,
         numberOfBytes: 3574,
@@ -93,15 +93,15 @@ describe("parse()", () => {
         parse(
           `177.71.128.21 test - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
         rfc931: "test",
         user: null,
         datetime: "10/Jul/2018:22:21:28 +0200",
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: 200,
         numberOfBytes: 3574,
@@ -113,27 +113,27 @@ describe("parse()", () => {
         parse(
           `177.71.128.21 test testUser - "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
         rfc931: "test",
         user: "testUser",
-        datetime: "",
+        datetime: null,
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: 200,
         numberOfBytes: 3574,
       });
     });
 
-    test("Missing Datetime", () => {
+    test("Missing Request", () => {
       expect(
         parse(
           `177.71.128.21 test testUser [10/Jul/2018:22:21:28 +0200] - 200 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
         rfc931: "test",
         user: "testUser",
@@ -149,15 +149,15 @@ describe("parse()", () => {
         parse(
           `177.71.128.21 test testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" - 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
         rfc931: "test",
         user: "testUser",
-        datetime: "",
+        datetime: "10/Jul/2018:22:21:28 +0200",
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: null,
         numberOfBytes: 3574,
@@ -169,15 +169,15 @@ describe("parse()", () => {
         parse(
           `177.71.128.21 test testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 -`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
         rfc931: "test",
         user: "testUser",
-        datetime: "",
+        datetime: "10/Jul/2018:22:21:28 +0200",
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: 200,
         numberOfBytes: null,
@@ -191,15 +191,15 @@ describe("parse()", () => {
         parse(
           `177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
-      ).resolves.toBe({
+      ).resolves.toStrictEqual({
         ipAddress: "177.71.128.21",
-        rfc931: "test",
-        user: "testUser",
-        datetime: "",
+        rfc931: null,
+        user: null,
+        datetime: "10/Jul/2018:22:21:28 +0200",
         request: {
-          Method: "GET",
-          Path: "/intranet-analytics",
-          Protocol: "HTTP/1.1",
+          method: "GET",
+          path: "/intranet-analytics/",
+          protocol: "HTTP/1.1",
         },
         responseStatus: 200,
         numberOfBytes: 3574,
