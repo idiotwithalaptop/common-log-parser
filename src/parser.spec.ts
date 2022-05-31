@@ -2,44 +2,44 @@ import parse from "./parser";
 
 describe("parse()", () => {
   describe("Invalid Log Entry", () => {
-    test("Empty string causes error callback", () => {
-      expect(parse("")).rejects.toBe("Invalid log entry");
+    test("Empty string causes error callback", async () => {
+      await expect(parse("")).rejects.toBe("Invalid log entry");
     });
 
-    test("Invalid IP Address", () => {
-      expect(
+    test("Invalid IP Address", async () => {
+      await expect(
         parse(
           `ABC.123.ASDA - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574"`
         )
       ).rejects.toBe("Invalid log entry");
     });
 
-    test("Invalid datetime", () => {
-      expect(
+    test("Invalid datetime", async () => {
+      await expect(
         parse(
           `177.71.128.21 - - ASDASDASD "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
       ).rejects.toBe("Invalid log entry");
     });
 
-    test("Invalid request", () => {
-      expect(
+    test("Invalid request", async () => {
+      await expect(
         parse(
           `177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "HASDHASH1234" 200 3574`
         )
       ).rejects.toBe("Invalid log entry");
     });
 
-    test("Invalid Response Code", () => {
-      expect(
+    test("Invalid Response Code", async () => {
+      await expect(
         parse(
           `177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" FOO 3574`
         )
       ).rejects.toBe("Invalid log entry");
     });
 
-    test("Invalid Bytes", () => {
-      expect(
+    test("Invalid Bytes", async () => {
+      await expect(
         parse(
           `177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 NONNUMBER`
         )
@@ -48,8 +48,8 @@ describe("parse()", () => {
   });
 
   describe("Missing Fields", () => {
-    test("Missing IP Address", () => {
-      expect(
+    test("Missing IP Address", async () => {
+      await expect(
         parse(
           `- test testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
@@ -68,8 +68,8 @@ describe("parse()", () => {
       });
     });
 
-    test("Missing RFC931", () => {
-      expect(
+    test("Missing RFC931", async () => {
+      await expect(
         parse(
           `177.71.128.21 - testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
@@ -88,8 +88,8 @@ describe("parse()", () => {
       });
     });
 
-    test("Missing UserID", () => {
-      expect(
+    test("Missing UserID", async () => {
+      await expect(
         parse(
           `177.71.128.21 test - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
@@ -108,8 +108,8 @@ describe("parse()", () => {
       });
     });
 
-    test("Missing Datetime", () => {
-      expect(
+    test("Missing Datetime", async () => {
+      await expect(
         parse(
           `177.71.128.21 test testUser - "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
@@ -128,8 +128,8 @@ describe("parse()", () => {
       });
     });
 
-    test("Missing Request", () => {
-      expect(
+    test("Missing Request", async () => {
+      await expect(
         parse(
           `177.71.128.21 test testUser [10/Jul/2018:22:21:28 +0200] - 200 3574`
         )
@@ -144,8 +144,8 @@ describe("parse()", () => {
       });
     });
 
-    test("Missing Response status", () => {
-      expect(
+    test("Missing Response status", async () => {
+      await expect(
         parse(
           `177.71.128.21 test testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" - 3574`
         )
@@ -164,8 +164,8 @@ describe("parse()", () => {
       });
     });
 
-    test("Missing Bytes", () => {
-      expect(
+    test("Missing Bytes", async () => {
+      await expect(
         parse(
           `177.71.128.21 test testUser [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 -`
         )
@@ -186,8 +186,8 @@ describe("parse()", () => {
   });
 
   describe("Other Valid scenarios", () => {
-    test("Example from document - passes parsing", () => {
-      expect(
+    test("Example from document - passes parsing", async () => {
+      await expect(
         parse(
           `177.71.128.21 - - [10/Jul/2018:22:21:28 +0200] "GET /intranet-analytics/ HTTP/1.1" 200 3574`
         )
