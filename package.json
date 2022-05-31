@@ -7,7 +7,7 @@
     "lint": "eslint --ext .js,.ts .",
     "prepare": "tsc",
     "start": "ts-node src/index.ts",
-    "test": "jest"
+    "test": "jest --coverage --watchAll"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,9 @@
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
     "jest": "^28.1.0",
+    "prettier": "^2.6.2",
     "ts-jest": "^28.0.3",
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
