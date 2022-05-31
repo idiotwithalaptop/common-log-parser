@@ -9,7 +9,7 @@ export type LogEntry = {
 };
 
 type LogRequest = {
-  Method: string;
-  Path: string;
-  Protocol: string;
+  method: string;
+  path: string;
+  protocol: string;
 };

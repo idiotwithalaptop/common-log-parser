@@ -1,4 +1,4 @@
-import parse from "./parse";
+import parse from "./parser";
 
 describe("parse()", () => {
   describe("Invalid Log Entry", () => {
