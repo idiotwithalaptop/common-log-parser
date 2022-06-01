@@ -26,3 +26,4 @@ A simple command-line tool to parse log input in the [Common Log Format](https:/
   - `response-status`: The HTTP numeric status code. Full list of status codes available in the [HTTP Specification](http://www.w3.org/Protocols/rfc2616/rfc2616.txt)
   - `number-of-bytes`: The size of the content of the request, not including the headers, in bytes.
 - Any log field with a value of "-" is considered to be an unavailable value.
+- The requirement for "Top 3 most visited URLs" is referring to the request paths. There are no URLs in the log entries as we don't have the host of these requests, I had to assume that these paths are for the same host and therefore analysing the request paths forfills this requirement.

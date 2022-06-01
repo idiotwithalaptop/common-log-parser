@@ -1,18 +1,18 @@
 import { LogAnalyser, LogAnalyserReport, LogEntry } from "../types";
 import { StringOccuranceCounter } from "./stringOccuranceCounter";
 
-const ANALYSER_NAME = "Top Three URL Analyser";
-export class TopThreeUrlAnalyser implements LogAnalyser {
-  private readonly urls: StringOccuranceCounter;
+const ANALYSER_NAME = "Top Three IP Address Analyser";
+export class TopThreeIpAnalyser implements LogAnalyser {
+  private readonly ips: StringOccuranceCounter;
 
   constructor() {
-    this.urls = new StringOccuranceCounter();
+    this.ips = new StringOccuranceCounter();
   }
 
   analyse(entry: LogEntry): Promise<void> {
     return new Promise((resolve) => {
-      if (entry && entry.request) {
-        this.urls.add(entry.request.path);
+      if (entry && entry.ipAddress) {
+        this.ips.add(entry.ipAddress);
       }
       resolve();
     });
@@ -20,18 +20,18 @@ export class TopThreeUrlAnalyser implements LogAnalyser {
 
   report(): Promise<LogAnalyserReport> {
     return new Promise<LogAnalyserReport>((resolve) => {
-      // Handle special case where no URLs were analysed
-      if (this.urls.count() === 0) {
+      // Handle special case where no IPs were analysed
+      if (this.ips.count() === 0) {
         resolve({
           name: ANALYSER_NAME,
-          result: "There were 0 URLs analysed.",
+          result: "There were 0 IP addresses analysed.",
         });
         return;
       }
 
       resolve({
         name: ANALYSER_NAME,
-        result: this.urls.getTopOccurancesString(3),
+        result: this.ips.getTopOccurancesString(3),
       });
     });
   }
