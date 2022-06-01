@@ -11,7 +11,7 @@ describe("Unique Ip Address Analyser", () => {
     await expect(analyser.analyse(null)).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Unique IP Address Analyser",
-      result: "There were 0 unique IP addresses analysed.",
+      result: "  There were 0 unique IP addresses analysed.",
     });
   });
 
@@ -19,7 +19,7 @@ describe("Unique Ip Address Analyser", () => {
     await expect(analyser.analyse({ ipAddress: null })).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Unique IP Address Analyser",
-      result: "There were 0 unique IP addresses analysed.",
+      result: "  There were 0 unique IP addresses analysed.",
     });
   });
 
@@ -27,7 +27,7 @@ describe("Unique Ip Address Analyser", () => {
     await expect(analyser.analyse({ ipAddress: "123.222.123.123" })).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Unique IP Address Analyser",
-      result: "There were 1 unique IP addresses analysed.",
+      result: "  There were 1 unique IP addresses analysed.",
     });
   });
 
@@ -42,7 +42,7 @@ describe("Unique Ip Address Analyser", () => {
       });
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Unique IP Address Analyser",
-      result: "There were 2 unique IP addresses analysed.",
+      result: "  There were 2 unique IP addresses analysed.",
     });
   });
 });

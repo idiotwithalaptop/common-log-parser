@@ -24,7 +24,7 @@ export class TopThreeIpAnalyser implements LogAnalyser {
       if (this.ips.count() === 0) {
         resolve({
           name: ANALYSER_NAME,
-          result: "There were 0 IP addresses analysed.",
+          result: "  There were 0 IP addresses analysed.",
         });
         return;
       }

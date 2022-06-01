@@ -11,7 +11,7 @@ describe("Top Three IP Address Analyser", () => {
     await expect(analyser.analyse(null)).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Top Three IP Address Analyser",
-      result: "There were 0 IP addresses analysed.",
+      result: "  There were 0 IP addresses analysed.",
     });
   });
 
@@ -19,7 +19,7 @@ describe("Top Three IP Address Analyser", () => {
     await expect(analyser.analyse({ ipAddress: null })).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Top Three IP Address Analyser",
-      result: "There were 0 IP addresses analysed.",
+      result: "  There were 0 IP addresses analysed.",
     });
   });
 

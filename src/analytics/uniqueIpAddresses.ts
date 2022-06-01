@@ -20,7 +20,7 @@ export class UniqueIpAddressAnalyser implements LogAnalyser {
     return new Promise<LogAnalyserReport>((resolve) => {
       resolve({
         name: "Unique IP Address Analyser",
-        result: `There were ${this.ipAddresses.size} unique IP addresses analysed.`,
+        result: `  There were ${this.ipAddresses.size} unique IP addresses analysed.`,
       });
     });
   }

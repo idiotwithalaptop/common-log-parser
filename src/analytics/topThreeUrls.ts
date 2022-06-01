@@ -24,7 +24,7 @@ export class TopThreeUrlAnalyser implements LogAnalyser {
       if (this.urls.count() === 0) {
         resolve({
           name: ANALYSER_NAME,
-          result: "There were 0 URLs analysed.",
+          result: "  There were 0 URLs analysed.",
         });
         return;
       }

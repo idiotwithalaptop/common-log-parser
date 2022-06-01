@@ -11,7 +11,7 @@ describe("Top Three URL Analyser", () => {
     await expect(analyser.analyse(null)).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Top Three URL Analyser",
-      result: "There were 0 URLs analysed.",
+      result: "  There were 0 URLs analysed.",
     });
   });
 
@@ -19,7 +19,7 @@ describe("Top Three URL Analyser", () => {
     await expect(analyser.analyse({ request: null })).resolves;
     await expect(analyser.report()).resolves.toStrictEqual({
       name: "Top Three URL Analyser",
-      result: "There were 0 URLs analysed.",
+      result: "  There were 0 URLs analysed.",
     });
   });
 
