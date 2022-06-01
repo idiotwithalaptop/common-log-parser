@@ -2,6 +2,43 @@
 
 A simple command-line tool to parse log input in the [Common Log Format](https://www.w3.org/Daemon/User/Config/Logging.html#common-logfile-format).
 
+## Gettings Started
+
+### Pre-Requisites
+
+- Node (at least v17.0.0)
+- NPM
+
+### First setup
+
+On first setup, you will need to ensure that the application's libaries are installed and ready for use. To do this, you just need to run from a command-line prompt:
+
+```
+npm install
+```
+
+## Running the parser
+
+The parser accepts file input via stdin. So to run it, run the following command with the file you wish to parse.
+
+```
+npm run < path/to/file/to/pass
+```
+
+In this example, it's using one of the pre-packed example files:
+
+```
+npm run < ./examples/programming-task-example-data.log
+```
+
+## Running tests
+
+Unit tests are implemented using Jes and can be run by running:
+
+```
+npm test
+```
+
 ## Design Decisions
 
 - Solution consists of two parts, a line parser and a number of analytical plugins.
