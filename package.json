@@ -14,7 +14,7 @@
     "url": "git+https://github.com/idiotwithalaptop/common-log-analyser.git"
   },
   "author": "Ryan Brown",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/idiotwithalaptop/common-log-analyser/issues"
   },
