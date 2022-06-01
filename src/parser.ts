@@ -3,8 +3,6 @@ import { LogEntry } from "./types";
 const LOG_ENTRY_REGEX =
   /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|-) (.+) (.+) (\[(.+)\]|-) ("(\S+) (\S+) (\S+)"|-) (\d\d\d|-) (\d+|-).*$/;
 
-const REQUEST_REGEX = /^"(\S+) (\S+) (\S+)"$/;
-
 export default function parse(log: string): Promise<LogEntry> {
   return new Promise<LogEntry>((resolve, reject) => {
     const logEntryResult = LOG_ENTRY_REGEX.exec(log);

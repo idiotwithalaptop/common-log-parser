@@ -1,5 +1,3 @@
-import { LogAnalyser, LogAnalyserReport, LogEntry } from "../types";
-
 export class StringOccuranceCounter {
   private readonly occurances: Map<string, number>;
 

@@ -24,7 +24,7 @@ export function analyseLogStream(
             top3UrlAnalyser.analyse(logEntry),
           ]);
         })
-        .catch((error) => console.error(`Unable to parse ${line}`));
+        .catch(() => console.error(`Unable to parse ${line}`));
     });
     reader.on("close", () => {
       resolve();
